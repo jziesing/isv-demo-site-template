@@ -26780,7 +26780,7 @@
 	                        { key: index, className: 'list-group-item' },
 	                        _react2.default.createElement(
 	                            'a',
-	                            { href: obj.url },
+	                            { target: '_blank', href: obj.url },
 	                            obj.label
 	                        )
 	                    );
@@ -26799,7 +26799,7 @@
 	                        { key: index, className: 'list-group-item' },
 	                        _react2.default.createElement(
 	                            'a',
-	                            { href: obj.url },
+	                            { target: '_blank', href: obj.url },
 	                            obj.label
 	                        )
 	                    );
@@ -26818,7 +26818,7 @@
 	                        { key: index, className: 'list-group-item' },
 	                        _react2.default.createElement(
 	                            'a',
-	                            { href: obj.url },
+	                            { target: '_blank', href: obj.url },
 	                            obj.label
 	                        )
 	                    );
@@ -26841,21 +26841,25 @@
 	                    { className: 'container' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'row row_eq' },
+	                        { className: 'row' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'col-xs-6 col-md-4' },
-	                            _react2.default.createElement('img', { src: this.state.appLogo })
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'col-xs-12 col-sm-6 col-md-8 descriptArea' },
+	                            { className: 'media' },
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'page-header' },
+	                                { className: 'media-left' },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: '#' },
+	                                    _react2.default.createElement('img', { className: 'media-object', src: this.state.appLogo, alt: 'logo' })
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'media-body headingContainer' },
 	                                _react2.default.createElement(
 	                                    'h1',
-	                                    null,
+	                                    { className: 'media-heading' },
 	                                    this.state.appName
 	                                ),
 	                                _react2.default.createElement(
@@ -29050,7 +29054,50 @@
 	                            _react2.default.createElement(
 	                                'h1',
 	                                null,
-	                                'Config'
+	                                'Configure Your Landing Page'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement('div', { className: 'col-xs-6 col-md-4' }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-12 col-sm-6 col-md-8' },
+	                            _react2.default.createElement(
+	                                'h5',
+	                                null,
+	                                'ISV App Demo Kit Best Practices:'
+	                            ),
+	                            _react2.default.createElement(
+	                                'ul',
+	                                { className: 'list-group' },
+	                                _react2.default.createElement(
+	                                    'li',
+	                                    { className: 'list-group-item' },
+	                                    'Partner hosted landing page'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'li',
+	                                    { className: 'list-group-item' },
+	                                    'Demo Packages (unmanaged or managed, managed is recommended to allow updates)'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'li',
+	                                    { className: 'list-group-item' },
+	                                    'Demo Guides (pdf on how to demo what)'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'li',
+	                                    { className: 'list-group-item' },
+	                                    'Setup Instructions (pdf on how to setup the demos)'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'li',
+	                                    { className: 'list-group-item' },
+	                                    'A dedicated contact for technical and demo help'
+	                                )
 	                            )
 	                        )
 	                    ),

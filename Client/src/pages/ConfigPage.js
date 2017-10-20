@@ -54,7 +54,20 @@ class ConfigPage extends React.Component {
                     <div class="row">
                         <div class="col-xs-6 col-md-4"></div>
                         <div class="col-xs-12 col-sm-6 col-md-8">
-                            <h1>Config</h1>
+                            <h1>Configure Your Landing Page</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-4"></div>
+                        <div class="col-xs-12 col-sm-6 col-md-8">
+                            <h5>ISV App Demo Kit Best Practices:</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item">Partner hosted landing page</li>
+                                <li class="list-group-item">Demo Packages (unmanaged or managed, managed is recommended to allow updates)</li>
+                                <li class="list-group-item">Demo Guides (pdf on how to demo what)</li>
+                                <li class="list-group-item">Setup Instructions (pdf on how to setup the demos)</li>
+                                <li class="list-group-item">A dedicated contact for technical and demo help</li>
+                            </ul>
                         </div>
                     </div>
                     <ConfigForm configPword={this.state.pword} />

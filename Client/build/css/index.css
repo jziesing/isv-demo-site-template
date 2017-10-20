@@ -42,6 +42,9 @@
 .contactArr {
     text-align: center;
 }
+.headingContainer {
+    vertical-align: middle;
+}
 @media (max-width: 767px) {
     .footer {
       margin-left: -20px;

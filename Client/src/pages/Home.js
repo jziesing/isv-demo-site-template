@@ -89,13 +89,15 @@ class Home extends React.Component {
 
             <div class="mainArea">
                 <div class="container">
-                    <div class="row row_eq">
-                        <div class="col-xs-6 col-md-4">
-                            <img src={this.state.appLogo} />
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-8 descriptArea">
-                            <div class="page-header">
-                                <h1>{this.state.appName}</h1>
+                    <div class="row">
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object" src={this.state.appLogo} alt="logo" />
+                                </a>
+                            </div>
+                            <div class="media-body headingContainer">
+                                <h1 class="media-heading">{this.state.appName}</h1>
                                 <h5>{this.state.briefDescription}</h5>
                             </div>
                         </div>
