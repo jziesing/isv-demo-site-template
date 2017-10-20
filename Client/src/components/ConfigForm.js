@@ -46,6 +46,7 @@ class ConfigForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            styleURL:'',
             appName: '',
             appLogo: null,
             appLogoFile: null,
@@ -56,6 +57,15 @@ class ConfigForm extends React.Component {
             setupInstructions: null,
             contactEmail: '',
             chatterURL: '',
+            styleOptions: [
+                {
+                    label:"Simplex",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css"
+                },{
+                    label:"Slate",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css"
+                }
+            ],
             packageLinksAdderFields: [
                 {
                     label: 'Label for Package',
@@ -107,6 +117,7 @@ class ConfigForm extends React.Component {
         this.handlePackageLinkRemove = this.handlePackageLinkRemove.bind(this);
         this.handleDemoGuideRemove = this.handleDemoGuideRemove.bind(this);
         this.handleSetupInstructionRemove = this.handleSetupInstructionRemove.bind(this);
+        this.handleStyleChange = this.handleStyleChange.bind(this);
     }
 
     componentWillMount() {
@@ -120,6 +131,7 @@ class ConfigForm extends React.Component {
                     let parsedResp = JSON.parse(response.text);
                     console.log(parsedResp);
                     this.setState({
+                        styleURL: parsedResp['styleURL'],
                         appName: parsedResp['appName'],
                         briefDescription: parsedResp['briefDescription'],
                         appLogo: parsedResp['appLogo'],
@@ -178,7 +190,7 @@ class ConfigForm extends React.Component {
             updateUrl = '/api/config-app';
 
         if(typeof(pword) != 'undefined'  && pword != '') {
-            
+
             ajax.post(updateUrl)
                 .set({
                     'Content-Type': 'application/json',
@@ -193,7 +205,8 @@ class ConfigForm extends React.Component {
                     demoGuides: this.state.demoGuides,
                     setupInstructions: this.state.setupInstructions,
                     contactEmail: this.state.contactEmail,
-                    chatterURL: this.state.chatterURL
+                    chatterURL: this.state.chatterURL,
+                    styleURL: this.state.styleURL
                 }).end((error, response) => {
                     if(!error && response.status == 200) {
                         console.log('success : confirg form submited');
@@ -416,6 +429,19 @@ class ConfigForm extends React.Component {
         this.setState({setupInstructions: setupInstructs});
     }
 
+    styleOptionsMarkup() {
+        return this.state.styleOptions.map((obj, index) => {
+            return (
+                <option key={index} value={obj.url}>{obj.label}</option>
+            );
+        });
+    }
+
+    handleStyleChange(event) {
+        console.log(event.target.value);
+        this.setState({styleURL: event.target.value});
+    }
+
     render() {
 
         let imgPrevMarkup = null;
@@ -428,6 +454,14 @@ class ConfigForm extends React.Component {
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2">
                     <form class="form-horizontal" onSubmit={this.handleFormSubmit}>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="appName">Style Theme</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="sel1" value={this.state.styleURL} onChange={this.handleStyleChange}>
+                                    {this.styleOptionsMarkup()}
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="appName">App Name</label>
                             <div class="col-sm-10">

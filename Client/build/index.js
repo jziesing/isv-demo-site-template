@@ -21444,7 +21444,7 @@
 	    IndexRoute = ReactRouter.IndexRoute,
 	    browserHistory = ReactRouter.browserHistory,
 	    Layout = __webpack_require__(234),
-	    Home = __webpack_require__(236),
+	    Home = __webpack_require__(243),
 	    ConfigPage = __webpack_require__(244);
 
 	module.exports = React.createElement(
@@ -26536,6 +26536,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var ajax = __webpack_require__(236);
+
 	var Layout = function (_React$Component) {
 		_inherits(Layout, _React$Component);
 
@@ -26545,12 +26547,36 @@
 			var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, props));
 
 			_this.state = {
-				appName: 'testing'
+				appName: 'testing',
+				styleURL: ''
 			};
 			return _this;
 		}
 
 		_createClass(Layout, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				var _this2 = this;
+
+				if (typeof window !== 'undefined' && window.document && window.document.createElement) {
+					var appDataURL = '/api/app-info/';
+					ajax.get(appDataURL).send().end(function (error, response) {
+						if (!error && response.status == 200) {
+							console.log('success');
+							console.log(response);
+							var parsedResp = JSON.parse(response.text);
+							console.log(parsedResp);
+							_this2.setState({
+								styleURL: parsedResp['styleURL']
+							});
+						} else {
+							console.log('fail');
+							console.log(error);
+						}
+					});
+				}
+			}
+		}, {
 			key: 'footerBtnType',
 			value: function footerBtnType() {
 				var currLocc = this.props.location.pathname;
@@ -26588,7 +26614,7 @@
 							null,
 							'Test'
 						),
-						_react2.default.createElement('link', { href: '/css/bootswatch-simplex.min.css', rel: 'stylesheet' }),
+						_react2.default.createElement('link', { href: this.state.styleURL, rel: 'stylesheet' }),
 						_react2.default.createElement('link', { href: '/css/fontawesome.min.css', rel: 'stylesheet' }),
 						_react2.default.createElement('link', { href: '/css/index.css', rel: 'stylesheet' })
 					),
@@ -26691,306 +26717,6 @@
 /* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(178);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var ajax = __webpack_require__(237);
-
-	var Home = function (_React$Component) {
-	    _inherits(Home, _React$Component);
-
-	    function Home(props) {
-	        _classCallCheck(this, Home);
-
-	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
-
-	        _this.state = {
-	            appName: '',
-	            appLogo: '',
-	            appLogoFile: '',
-	            briefDescription: '',
-	            description: '',
-	            packageLinks: null,
-	            demoGuides: null,
-	            setupInstructions: null,
-	            contactEmail: '',
-	            chatterURL: ''
-	        };
-	        return _this;
-	    }
-	    // call pub routes for app info
-
-
-	    _createClass(Home, [{
-	        key: 'componentWillMount',
-	        value: function componentWillMount() {
-	            var _this2 = this;
-
-	            if (typeof window !== 'undefined' && window.document && window.document.createElement) {
-	                var appDataURL = '/api/app-info/';
-	                ajax.get(appDataURL).send().end(function (error, response) {
-	                    if (!error && response.status == 200) {
-	                        console.log('success');
-	                        console.log(response);
-	                        var parsedResp = JSON.parse(response.text);
-	                        console.log(parsedResp);
-	                        _this2.setState({
-	                            appName: parsedResp['appName'],
-	                            appLogo: parsedResp['appLogo'],
-	                            appLogoFile: parsedResp['appLogoFile'],
-	                            briefDescription: parsedResp['briefDescription'],
-	                            description: parsedResp['description'],
-	                            packageLinks: parsedResp['packageLinks'],
-	                            demoGuides: parsedResp['demoGuides'],
-	                            setupInstructions: parsedResp['setupInstructions'],
-	                            contactEmail: parsedResp['contactEmail'],
-	                            chatterURL: parsedResp['chatterURL']
-	                        });
-	                    } else {
-	                        console.log('fail');
-	                        console.log(error);
-	                    }
-	                });
-	            }
-	        }
-	    }, {
-	        key: 'packageLinksMarkup',
-	        value: function packageLinksMarkup() {
-	            if (this.state.packageLinks != null) {
-	                return this.state.packageLinks.map(function (obj, index) {
-	                    return _react2.default.createElement(
-	                        'li',
-	                        { key: index, className: 'list-group-item' },
-	                        _react2.default.createElement(
-	                            'a',
-	                            { target: '_blank', href: obj.url },
-	                            obj.label
-	                        )
-	                    );
-	                });
-	            } else {
-	                return null;
-	            }
-	        }
-	    }, {
-	        key: 'demoGuidesMarkup',
-	        value: function demoGuidesMarkup() {
-	            if (this.state.demoGuides != null) {
-	                return this.state.demoGuides.map(function (obj, index) {
-	                    return _react2.default.createElement(
-	                        'li',
-	                        { key: index, className: 'list-group-item' },
-	                        _react2.default.createElement(
-	                            'a',
-	                            { target: '_blank', href: obj.url },
-	                            obj.label
-	                        )
-	                    );
-	                });
-	            } else {
-	                return null;
-	            }
-	        }
-	    }, {
-	        key: 'setupInstructionsMarkup',
-	        value: function setupInstructionsMarkup() {
-	            if (this.state.setupInstructions != null) {
-	                return this.state.setupInstructions.map(function (obj, index) {
-	                    return _react2.default.createElement(
-	                        'li',
-	                        { key: index, className: 'list-group-item' },
-	                        _react2.default.createElement(
-	                            'a',
-	                            { target: '_blank', href: obj.url },
-	                            obj.label
-	                        )
-	                    );
-	                });
-	            } else {
-	                return null;
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-
-	            var contactEmailHref = 'mailto:' + this.state.contactEmail;
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'mainArea' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'container' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'media' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'media-left' },
-	                                _react2.default.createElement(
-	                                    'a',
-	                                    { href: '#' },
-	                                    _react2.default.createElement('img', { className: 'media-object', src: this.state.appLogo, alt: 'logo' })
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'media-body headingContainer' },
-	                                _react2.default.createElement(
-	                                    'h1',
-	                                    { className: 'media-heading' },
-	                                    this.state.appName
-	                                ),
-	                                _react2.default.createElement(
-	                                    'h5',
-	                                    null,
-	                                    this.state.briefDescription
-	                                )
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement(
-	                            'h4',
-	                            null,
-	                            this.state.description
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'col-xs-6 col-sm-4' },
-	                            _react2.default.createElement(
-	                                'h2',
-	                                null,
-	                                _react2.default.createElement(
-	                                    'small',
-	                                    null,
-	                                    'Package Links:'
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'ul',
-	                                { className: 'list-group' },
-	                                this.packageLinksMarkup()
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'col-xs-6 col-sm-4' },
-	                            _react2.default.createElement(
-	                                'h2',
-	                                null,
-	                                _react2.default.createElement(
-	                                    'small',
-	                                    null,
-	                                    'Demo Guides:'
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'ul',
-	                                { className: 'list-group' },
-	                                this.demoGuidesMarkup()
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'col-xs-6 col-sm-4' },
-	                            _react2.default.createElement(
-	                                'h2',
-	                                null,
-	                                _react2.default.createElement(
-	                                    'small',
-	                                    null,
-	                                    'Setup Instructions:'
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'ul',
-	                                { className: 'list-group' },
-	                                this.setupInstructionsMarkup()
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row contactArr' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'col-xs-12 col-sm-6 col-md-6' },
-	                            _react2.default.createElement(
-	                                'a',
-	                                { href: contactEmailHref },
-	                                this.state.contactEmail
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'col-xs-12 col-sm-6 col-md-6' },
-	                            this.state.chatterURL
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
-	                    )
-	                ),
-	                _react2.default.createElement('div', { id: 'push' })
-	            );
-	        }
-	    }]);
-
-	    return Home;
-	}(_react2.default.Component);
-
-	exports.default = Home;
-	module.exports = exports['default'];
-
-/***/ },
-/* 237 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/**
 	 * Root reference for iframes.
 	 */
@@ -27005,11 +26731,11 @@
 	  root = this;
 	}
 
-	var Emitter = __webpack_require__(238);
-	var RequestBase = __webpack_require__(239);
-	var isObject = __webpack_require__(240);
-	var ResponseBase = __webpack_require__(241);
-	var shouldRetry = __webpack_require__(243);
+	var Emitter = __webpack_require__(237);
+	var RequestBase = __webpack_require__(238);
+	var isObject = __webpack_require__(239);
+	var ResponseBase = __webpack_require__(240);
+	var shouldRetry = __webpack_require__(242);
 
 	/**
 	 * Noop.
@@ -27900,7 +27626,7 @@
 
 
 /***/ },
-/* 238 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28069,13 +27795,13 @@
 
 
 /***/ },
-/* 239 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(240);
+	var isObject = __webpack_require__(239);
 
 	/**
 	 * Expose `RequestBase`.
@@ -28695,7 +28421,7 @@
 
 
 /***/ },
-/* 240 */
+/* 239 */
 /***/ function(module, exports) {
 
 	/**
@@ -28714,7 +28440,7 @@
 
 
 /***/ },
-/* 241 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -28722,7 +28448,7 @@
 	 * Module dependencies.
 	 */
 
-	var utils = __webpack_require__(242);
+	var utils = __webpack_require__(241);
 
 	/**
 	 * Expose `ResponseBase`.
@@ -28853,7 +28579,7 @@
 
 
 /***/ },
-/* 242 */
+/* 241 */
 /***/ function(module, exports) {
 
 	
@@ -28926,7 +28652,7 @@
 	};
 
 /***/ },
-/* 243 */
+/* 242 */
 /***/ function(module, exports) {
 
 	var ERROR_CODES = [
@@ -28953,6 +28679,306 @@
 	  return false;
 	};
 
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(178);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ajax = __webpack_require__(236);
+
+	var Home = function (_React$Component) {
+	    _inherits(Home, _React$Component);
+
+	    function Home(props) {
+	        _classCallCheck(this, Home);
+
+	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+
+	        _this.state = {
+	            appName: '',
+	            appLogo: '',
+	            appLogoFile: '',
+	            briefDescription: '',
+	            description: '',
+	            packageLinks: null,
+	            demoGuides: null,
+	            setupInstructions: null,
+	            contactEmail: '',
+	            chatterURL: ''
+	        };
+	        return _this;
+	    }
+	    // call pub routes for app info
+
+
+	    _createClass(Home, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var _this2 = this;
+
+	            if (typeof window !== 'undefined' && window.document && window.document.createElement) {
+	                var appDataURL = '/api/app-info/';
+	                ajax.get(appDataURL).send().end(function (error, response) {
+	                    if (!error && response.status == 200) {
+	                        console.log('success');
+	                        console.log(response);
+	                        var parsedResp = JSON.parse(response.text);
+	                        console.log(parsedResp);
+	                        _this2.setState({
+	                            appName: parsedResp['appName'],
+	                            appLogo: parsedResp['appLogo'],
+	                            appLogoFile: parsedResp['appLogoFile'],
+	                            briefDescription: parsedResp['briefDescription'],
+	                            description: parsedResp['description'],
+	                            packageLinks: parsedResp['packageLinks'],
+	                            demoGuides: parsedResp['demoGuides'],
+	                            setupInstructions: parsedResp['setupInstructions'],
+	                            contactEmail: parsedResp['contactEmail'],
+	                            chatterURL: parsedResp['chatterURL']
+	                        });
+	                    } else {
+	                        console.log('fail');
+	                        console.log(error);
+	                    }
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'packageLinksMarkup',
+	        value: function packageLinksMarkup() {
+	            if (this.state.packageLinks != null) {
+	                return this.state.packageLinks.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'a',
+	                            { target: '_blank', href: obj.url },
+	                            obj.label
+	                        )
+	                    );
+	                });
+	            } else {
+	                return null;
+	            }
+	        }
+	    }, {
+	        key: 'demoGuidesMarkup',
+	        value: function demoGuidesMarkup() {
+	            if (this.state.demoGuides != null) {
+	                return this.state.demoGuides.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'a',
+	                            { target: '_blank', href: obj.url },
+	                            obj.label
+	                        )
+	                    );
+	                });
+	            } else {
+	                return null;
+	            }
+	        }
+	    }, {
+	        key: 'setupInstructionsMarkup',
+	        value: function setupInstructionsMarkup() {
+	            if (this.state.setupInstructions != null) {
+	                return this.state.setupInstructions.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'a',
+	                            { target: '_blank', href: obj.url },
+	                            obj.label
+	                        )
+	                    );
+	                });
+	            } else {
+	                return null;
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            var contactEmailHref = 'mailto:' + this.state.contactEmail;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'mainArea' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'container' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'media' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'media-left' },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: '#' },
+	                                    _react2.default.createElement('img', { className: 'media-object', src: this.state.appLogo, alt: 'logo' })
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'media-body headingContainer' },
+	                                _react2.default.createElement(
+	                                    'h1',
+	                                    { className: 'media-heading' },
+	                                    this.state.appName
+	                                ),
+	                                _react2.default.createElement(
+	                                    'h5',
+	                                    null,
+	                                    this.state.briefDescription
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement(
+	                            'h4',
+	                            null,
+	                            this.state.description
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-6 col-sm-4' },
+	                            _react2.default.createElement(
+	                                'h2',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'small',
+	                                    null,
+	                                    'Package Links:'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'ul',
+	                                { className: 'list-group' },
+	                                this.packageLinksMarkup()
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-6 col-sm-4' },
+	                            _react2.default.createElement(
+	                                'h2',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'small',
+	                                    null,
+	                                    'Demo Guides:'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'ul',
+	                                { className: 'list-group' },
+	                                this.demoGuidesMarkup()
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-6 col-sm-4' },
+	                            _react2.default.createElement(
+	                                'h2',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'small',
+	                                    null,
+	                                    'Setup Instructions:'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'ul',
+	                                { className: 'list-group' },
+	                                this.setupInstructionsMarkup()
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row contactArr' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-12 col-sm-6 col-md-6' },
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: contactEmailHref },
+	                                this.state.contactEmail
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-12 col-sm-6 col-md-6' },
+	                            this.state.chatterURL
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
+	                    )
+	                ),
+	                _react2.default.createElement('div', { id: 'push' })
+	            );
+	        }
+	    }]);
+
+	    return Home;
+	}(_react2.default.Component);
+
+	exports.default = Home;
+	module.exports = exports['default'];
 
 /***/ },
 /* 244 */
@@ -28984,7 +29010,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ajax = __webpack_require__(237);
+	var ajax = __webpack_require__(236);
 
 	var ConfigPage = function (_React$Component) {
 	    _inherits(ConfigPage, _React$Component);
@@ -29249,7 +29275,7 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-	var ajax = __webpack_require__(237);
+	var ajax = __webpack_require__(236);
 	var FormData = __webpack_require__(247);
 
 	var ConfigForm = function (_React$Component) {
@@ -29261,6 +29287,7 @@
 	        var _this = _possibleConstructorReturn(this, (ConfigForm.__proto__ || Object.getPrototypeOf(ConfigForm)).call(this, props));
 
 	        _this.state = {
+	            styleURL: '',
 	            appName: '',
 	            appLogo: null,
 	            appLogoFile: null,
@@ -29271,6 +29298,13 @@
 	            setupInstructions: null,
 	            contactEmail: '',
 	            chatterURL: '',
+	            styleOptions: [{
+	                label: "Simplex",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css"
+	            }, {
+	                label: "Slate",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css"
+	            }],
 	            packageLinksAdderFields: [{
 	                label: 'Label for Package',
 	                value: '',
@@ -29316,6 +29350,7 @@
 	        _this.handlePackageLinkRemove = _this.handlePackageLinkRemove.bind(_this);
 	        _this.handleDemoGuideRemove = _this.handleDemoGuideRemove.bind(_this);
 	        _this.handleSetupInstructionRemove = _this.handleSetupInstructionRemove.bind(_this);
+	        _this.handleStyleChange = _this.handleStyleChange.bind(_this);
 	        return _this;
 	    }
 
@@ -29332,6 +29367,7 @@
 	                    var parsedResp = JSON.parse(response.text);
 	                    console.log(parsedResp);
 	                    _this2.setState({
+	                        styleURL: parsedResp['styleURL'],
 	                        appName: parsedResp['appName'],
 	                        briefDescription: parsedResp['briefDescription'],
 	                        appLogo: parsedResp['appLogo'],
@@ -29407,7 +29443,8 @@
 	                    demoGuides: this.state.demoGuides,
 	                    setupInstructions: this.state.setupInstructions,
 	                    contactEmail: this.state.contactEmail,
-	                    chatterURL: this.state.chatterURL
+	                    chatterURL: this.state.chatterURL,
+	                    styleURL: this.state.styleURL
 	                }).end(function (error, response) {
 	                    if (!error && response.status == 200) {
 	                        console.log('success : confirg form submited');
@@ -29702,6 +29739,23 @@
 	            this.setState({ setupInstructions: setupInstructs });
 	        }
 	    }, {
+	        key: 'styleOptionsMarkup',
+	        value: function styleOptionsMarkup() {
+	            return this.state.styleOptions.map(function (obj, index) {
+	                return _react2.default.createElement(
+	                    'option',
+	                    { key: index, value: obj.url },
+	                    obj.label
+	                );
+	            });
+	        }
+	    }, {
+	        key: 'handleStyleChange',
+	        value: function handleStyleChange(event) {
+	            console.log(event.target.value);
+	            this.setState({ styleURL: event.target.value });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 
@@ -29720,6 +29774,24 @@
 	                    _react2.default.createElement(
 	                        'form',
 	                        { className: 'form-horizontal', onSubmit: this.handleFormSubmit },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-group' },
+	                            _react2.default.createElement(
+	                                'label',
+	                                { className: 'col-sm-2 control-label', htmlFor: 'appName' },
+	                                'Style Theme'
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-10' },
+	                                _react2.default.createElement(
+	                                    'select',
+	                                    { className: 'form-control', id: 'sel1', value: this.state.styleURL, onChange: this.handleStyleChange },
+	                                    this.styleOptionsMarkup()
+	                                )
+	                            )
+	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
