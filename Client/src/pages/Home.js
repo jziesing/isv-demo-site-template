@@ -53,7 +53,7 @@ class Home extends React.Component {
     packageLinksMarkup() {
         if(this.state.packageLinks != null) {
             return this.state.packageLinks.map((obj, index) => {
-                return (<li key={index} class="list-group-item"><a href={obj.url}>{obj.label}</a></li>);
+                return (<li key={index} class="list-group-item"><a target="_blank" href={obj.url}>{obj.label}</a></li>);
             });
         } else {
             return null;
@@ -63,7 +63,7 @@ class Home extends React.Component {
     demoGuidesMarkup() {
         if(this.state.demoGuides != null) {
             return this.state.demoGuides.map((obj, index) => {
-                return (<li key={index} class="list-group-item"><a href={obj.url}>{obj.label}</a></li>);
+                return (<li key={index} class="list-group-item"><a target="_blank" href={obj.url}>{obj.label}</a></li>);
             });
         } else {
             return null;
@@ -73,7 +73,7 @@ class Home extends React.Component {
     setupInstructionsMarkup() {
         if(this.state.setupInstructions != null) {
             return this.state.setupInstructions.map((obj, index) => {
-                return (<li key={index} class="list-group-item"><a href={obj.url}>{obj.label}</a></li>);
+                return (<li key={index} class="list-group-item"><a target="_blank" href={obj.url}>{obj.label}</a></li>);
             });
         } else {
             return null;
