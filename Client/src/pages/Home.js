@@ -6,17 +6,16 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            appData: {
-                appName: '',
-                appLogo: '',
-                briefDescription: '',
-                description: '',
-                installInstructions: '',
-                installLink: '',
-                demoGuide: '',
-                contactEmail: '',
-                chatterURL: ''
-            }
+            appName: '',
+            appLogo: '',
+            appLogoFile: '',
+            briefDescription: '',
+            description: '',
+            packageLinks: null,
+            demoGuides: null,
+            setupInstructions: null,
+            contactEmail: '',
+            chatterURL: ''
 		};
     }
 	// call pub routes for app info
@@ -31,17 +30,18 @@ class Home extends React.Component {
 	                    console.log(response);
 						let parsedResp = JSON.parse(response.text);
                         console.log(parsedResp);
-						this.setState({appData: {
+						this.setState({
                             appName: parsedResp['appName'],
-                            appLogo: parsedResp['appLogoPreview'],
+                            appLogo: parsedResp['appLogo'],
+                            appLogoFile: parsedResp['appLogoFile'],
                             briefDescription: parsedResp['briefDescription'],
                             description: parsedResp['description'],
-                            installLink: parsedResp['installationLink'],
-                            installInstructions: parsedResp['installInstructions'],
-                            demoGuide: parsedResp['demoGuide'],
+                            packageLinks: parsedResp['packageLinks'],
+                            demoGuides: parsedResp['demoGuides'],
+                            setupInstructions: parsedResp['setupInstructions'],
                             contactEmail: parsedResp['contactEmail'],
                             chatterURL: parsedResp['chatterURL']
-                        }});
+                        });
 	                } else {
 	                    console.log('fail');
 	                    console.log(error);
@@ -50,9 +50,40 @@ class Home extends React.Component {
 		}
 	}
 
+    packageLinksMarkup() {
+        if(this.state.packageLinks != null) {
+            return this.state.packageLinks.map((obj, index) => {
+                return (<li key={index} class="list-group-item"><a href={obj.url}>{obj.label}</a></li>);
+            });
+        } else {
+            return null;
+        }
+    }
+
+    demoGuidesMarkup() {
+        if(this.state.demoGuides != null) {
+            return this.state.demoGuides.map((obj, index) => {
+                return (<li key={index} class="list-group-item"><a href={obj.url}>{obj.label}</a></li>);
+            });
+        } else {
+            return null;
+        }
+    }
+
+    setupInstructionsMarkup() {
+        if(this.state.setupInstructions != null) {
+            return this.state.setupInstructions.map((obj, index) => {
+                return (<li key={index} class="list-group-item"><a href={obj.url}>{obj.label}</a></li>);
+            });
+        } else {
+            return null;
+        }
+    }
+
 
     render() {
 
+        let contactEmailHref = 'mailto:' + this.state.contactEmail;
 
         return (
 
@@ -60,12 +91,12 @@ class Home extends React.Component {
                 <div class="container">
                     <div class="row row_eq">
                         <div class="col-xs-6 col-md-4">
-                            <img src={this.state.appData.appLogo} />
+                            <img src={this.state.appLogo} />
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-8 descriptArea">
                             <div class="page-header">
-                                <h1>{this.state.appData.appName}</h1>
-                                <h5>{this.state.appData.briefDescription}</h5>
+                                <h1>{this.state.appName}</h1>
+                                <h5>{this.state.briefDescription}</h5>
                             </div>
                         </div>
                     </div>
@@ -73,7 +104,7 @@ class Home extends React.Component {
                         <hr class="featurette-divider" />
                     </div>
                     <div class="row">
-                        <h4>{this.state.appData.description}</h4>
+                        <h4>{this.state.description}</h4>
                     </div>
                     <div class="row">
                         <hr class="featurette-divider" />
@@ -82,55 +113,31 @@ class Home extends React.Component {
                         <div class="col-xs-6 col-sm-4">
                             <h2><small>Package Links:</small></h2>
                             <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
+                                {this.packageLinksMarkup()}
                             </ul>
                         </div>
                         <div class="col-xs-6 col-sm-4">
-                            <h2><small>Demo Scripts:</small></h2>
+                            <h2><small>Demo Guides:</small></h2>
                             <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
+                                {this.demoGuidesMarkup()}
                             </ul>
                         </div>
                         <div class="col-xs-6 col-sm-4">
-                            <h2><small>Troubleshooting Guide:</small></h2>
+                            <h2><small>Setup Instructions:</small></h2>
                             <ul class="list-group">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Morbi leo risus</li>
-                                <li class="list-group-item">Porta ac consectetur ac</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
+                                {this.setupInstructionsMarkup()}
                             </ul>
                         </div>
-                    </div>
-                    <div class="row">
-                        <hr class="featurette-divider" />
-                    </div>
-                    <div class="row">
-                        {this.state.appData.installInstructions}
-                    </div>
-                    <div class="row">
-                        <hr class="featurette-divider" />
-                    </div>
-                    <div class="row">
-                        {this.state.appData.demoGuide}
                     </div>
                     <div class="row">
                         <hr class="featurette-divider" />
                     </div>
                     <div class="row contactArr">
                         <div class="col-xs-12 col-sm-6 col-md-6">
-                            {this.state.appData.contactEmail}
+                            <a href={contactEmailHref} >{this.state.contactEmail}</a>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
-                            {this.state.appData.chatterURL}
+                            {this.state.chatterURL}
                         </div>
                     </div>
                     <div class="row">

@@ -178,12 +178,23 @@ class ConfigForm extends React.Component {
             updateUrl = '/api/config-app';
 
         if(typeof(pword) != 'undefined'  && pword != '') {
+            
             ajax.post(updateUrl)
                 .set({
                     'Content-Type': 'application/json',
                     'sfdc_pwd': pword
-                }).send(this.state)
-                .end((error, response) => {
+                }).send({
+                    appName: this.state.appName,
+                    appLogo: this.state.appLogo,
+                    appLogoFile: this.state.appLogoFile,
+                    briefDescription: this.state.briefDescription,
+                    description: this.state.description,
+                    packageLinks: this.state.packageLinks,
+                    demoGuides: this.state.demoGuides,
+                    setupInstructions: this.state.setupInstructions,
+                    contactEmail: this.state.contactEmail,
+                    chatterURL: this.state.chatterURL
+                }).end((error, response) => {
                     if(!error && response.status == 200) {
                         console.log('success : confirg form submited');
                         browserHistory.push('/');

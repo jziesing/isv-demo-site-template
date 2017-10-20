@@ -26722,17 +26722,16 @@
 	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
 	        _this.state = {
-	            appData: {
-	                appName: '',
-	                appLogo: '',
-	                briefDescription: '',
-	                description: '',
-	                installInstructions: '',
-	                installLink: '',
-	                demoGuide: '',
-	                contactEmail: '',
-	                chatterURL: ''
-	            }
+	            appName: '',
+	            appLogo: '',
+	            appLogoFile: '',
+	            briefDescription: '',
+	            description: '',
+	            packageLinks: null,
+	            demoGuides: null,
+	            setupInstructions: null,
+	            contactEmail: '',
+	            chatterURL: ''
 	        };
 	        return _this;
 	    }
@@ -26752,17 +26751,18 @@
 	                        console.log(response);
 	                        var parsedResp = JSON.parse(response.text);
 	                        console.log(parsedResp);
-	                        _this2.setState({ appData: {
-	                                appName: parsedResp['appName'],
-	                                appLogo: parsedResp['appLogoPreview'],
-	                                briefDescription: parsedResp['briefDescription'],
-	                                description: parsedResp['description'],
-	                                installLink: parsedResp['installationLink'],
-	                                installInstructions: parsedResp['installInstructions'],
-	                                demoGuide: parsedResp['demoGuide'],
-	                                contactEmail: parsedResp['contactEmail'],
-	                                chatterURL: parsedResp['chatterURL']
-	                            } });
+	                        _this2.setState({
+	                            appName: parsedResp['appName'],
+	                            appLogo: parsedResp['appLogo'],
+	                            appLogoFile: parsedResp['appLogoFile'],
+	                            briefDescription: parsedResp['briefDescription'],
+	                            description: parsedResp['description'],
+	                            packageLinks: parsedResp['packageLinks'],
+	                            demoGuides: parsedResp['demoGuides'],
+	                            setupInstructions: parsedResp['setupInstructions'],
+	                            contactEmail: parsedResp['contactEmail'],
+	                            chatterURL: parsedResp['chatterURL']
+	                        });
 	                    } else {
 	                        console.log('fail');
 	                        console.log(error);
@@ -26771,8 +26771,67 @@
 	            }
 	        }
 	    }, {
+	        key: 'packageLinksMarkup',
+	        value: function packageLinksMarkup() {
+	            if (this.state.packageLinks != null) {
+	                return this.state.packageLinks.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: obj.url },
+	                            obj.label
+	                        )
+	                    );
+	                });
+	            } else {
+	                return null;
+	            }
+	        }
+	    }, {
+	        key: 'demoGuidesMarkup',
+	        value: function demoGuidesMarkup() {
+	            if (this.state.demoGuides != null) {
+	                return this.state.demoGuides.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: obj.url },
+	                            obj.label
+	                        )
+	                    );
+	                });
+	            } else {
+	                return null;
+	            }
+	        }
+	    }, {
+	        key: 'setupInstructionsMarkup',
+	        value: function setupInstructionsMarkup() {
+	            if (this.state.setupInstructions != null) {
+	                return this.state.setupInstructions.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'a',
+	                            { href: obj.url },
+	                            obj.label
+	                        )
+	                    );
+	                });
+	            } else {
+	                return null;
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+
+	            var contactEmailHref = 'mailto:' + this.state.contactEmail;
 
 	            return _react2.default.createElement(
 	                'div',
@@ -26786,7 +26845,7 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'col-xs-6 col-md-4' },
-	                            _react2.default.createElement('img', { src: this.state.appData.appLogo })
+	                            _react2.default.createElement('img', { src: this.state.appLogo })
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
@@ -26797,12 +26856,12 @@
 	                                _react2.default.createElement(
 	                                    'h1',
 	                                    null,
-	                                    this.state.appData.appName
+	                                    this.state.appName
 	                                ),
 	                                _react2.default.createElement(
 	                                    'h5',
 	                                    null,
-	                                    this.state.appData.briefDescription
+	                                    this.state.briefDescription
 	                                )
 	                            )
 	                        )
@@ -26818,7 +26877,7 @@
 	                        _react2.default.createElement(
 	                            'h4',
 	                            null,
-	                            this.state.appData.description
+	                            this.state.description
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -26844,31 +26903,7 @@
 	                            _react2.default.createElement(
 	                                'ul',
 	                                { className: 'list-group' },
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Cras justo odio'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Dapibus ac facilisis in'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Morbi leo risus'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Porta ac consectetur ac'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Vestibulum at eros'
-	                                )
+	                                this.packageLinksMarkup()
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -26880,37 +26915,13 @@
 	                                _react2.default.createElement(
 	                                    'small',
 	                                    null,
-	                                    'Demo Scripts:'
+	                                    'Demo Guides:'
 	                                )
 	                            ),
 	                            _react2.default.createElement(
 	                                'ul',
 	                                { className: 'list-group' },
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Cras justo odio'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Dapibus ac facilisis in'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Morbi leo risus'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Porta ac consectetur ac'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Vestibulum at eros'
-	                                )
+	                                this.demoGuidesMarkup()
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -26922,59 +26933,15 @@
 	                                _react2.default.createElement(
 	                                    'small',
 	                                    null,
-	                                    'Troubleshooting Guide:'
+	                                    'Setup Instructions:'
 	                                )
 	                            ),
 	                            _react2.default.createElement(
 	                                'ul',
 	                                { className: 'list-group' },
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Cras justo odio'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Dapibus ac facilisis in'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Morbi leo risus'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Porta ac consectetur ac'
-	                                ),
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    { className: 'list-group-item' },
-	                                    'Vestibulum at eros'
-	                                )
+	                                this.setupInstructionsMarkup()
 	                            )
 	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        this.state.appData.installInstructions
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement('hr', { className: 'featurette-divider' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        this.state.appData.demoGuide
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -26987,12 +26954,16 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'col-xs-12 col-sm-6 col-md-6' },
-	                            this.state.appData.contactEmail
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: contactEmailHref },
+	                                this.state.contactEmail
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'col-xs-12 col-sm-6 col-md-6' },
-	                            this.state.appData.chatterURL
+	                            this.state.chatterURL
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -29375,10 +29346,22 @@
 	                updateUrl = '/api/config-app';
 
 	            if (typeof pword != 'undefined' && pword != '') {
+
 	                ajax.post(updateUrl).set({
 	                    'Content-Type': 'application/json',
 	                    'sfdc_pwd': pword
-	                }).send(this.state).end(function (error, response) {
+	                }).send({
+	                    appName: this.state.appName,
+	                    appLogo: this.state.appLogo,
+	                    appLogoFile: this.state.appLogoFile,
+	                    briefDescription: this.state.briefDescription,
+	                    description: this.state.description,
+	                    packageLinks: this.state.packageLinks,
+	                    demoGuides: this.state.demoGuides,
+	                    setupInstructions: this.state.setupInstructions,
+	                    contactEmail: this.state.contactEmail,
+	                    chatterURL: this.state.chatterURL
+	                }).end(function (error, response) {
 	                    if (!error && response.status == 200) {
 	                        console.log('success : confirg form submited');
 	                        _reactRouter.browserHistory.push('/');
