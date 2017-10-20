@@ -15,7 +15,7 @@ class Footer extends React.Component {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
-                            <p class="text-muted">&copy; { new Date().getFullYear() + ' ' + this.props.appName }</p>
+                            <p class="text-muted">{ new Date().getFullYear() }</p>
                         </div>
                         <div class="col-md-4 col-md-offset-4 navBtn">
                             <Link to={this.props.btnInfo.path}>{this.props.btnInfo.label}</Link>

@@ -73,7 +73,7 @@ class Home extends React.Component {
                         <hr class="featurette-divider" />
                     </div>
                     <div class="row">
-                        {this.state.appData.description}
+                        <h4>{this.state.appData.description}</h4>
                     </div>
                     <div class="row">
                         <hr class="featurette-divider" />

@@ -40,6 +40,7 @@ class Layout extends React.Component {
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	              	<title>Test</title>
 					<link href="/css/bootswatch-simplex.min.css" rel="stylesheet" />
+					<link href="/css/fontawesome.min.css" rel="stylesheet" />
 					<link href="/css/index.css" rel="stylesheet" />
 	          	</head>
 	          	<body>

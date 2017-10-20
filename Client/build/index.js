@@ -26589,6 +26589,7 @@
 							'Test'
 						),
 						_react2.default.createElement('link', { href: '/css/bootswatch-simplex.min.css', rel: 'stylesheet' }),
+						_react2.default.createElement('link', { href: '/css/fontawesome.min.css', rel: 'stylesheet' }),
 						_react2.default.createElement('link', { href: '/css/index.css', rel: 'stylesheet' })
 					),
 					_react2.default.createElement(
@@ -26662,8 +26663,7 @@
 	                            _react2.default.createElement(
 	                                'p',
 	                                { className: 'text-muted' },
-	                                '\xA9 ',
-	                                new Date().getFullYear() + ' ' + this.props.appName
+	                                new Date().getFullYear()
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -26815,7 +26815,11 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'row' },
-	                        this.state.appData.description
+	                        _react2.default.createElement(
+	                            'h4',
+	                            null,
+	                            this.state.appData.description
+	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -29181,16 +29185,54 @@
 
 	var _reactRouter = __webpack_require__(179);
 
+	var _Adder = __webpack_require__(246);
+
+	var _Adder2 = _interopRequireDefault(_Adder);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  @configForm.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *      props:
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          configPword (password used in header to update )
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *      state:
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *        (vars used in site_data.json)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          appName (string)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          appLogo (string)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          appLogoFile (string)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          briefDescription (string)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          description (string)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          packageLinks (array[{label, url}])
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          demoGuides (array[{label, url}])
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          setupInstructions (array[{label, url}])
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          contactEmail (string)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          chatterURL (string)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *        (other vars for the form)
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          packageLinksAdderFields (array[{label, value, type, id}])
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          demoGuidesAdderFields (array[{label, value, type, id}])
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          setupInstructionsAdderFields (array[{label, value, type, id}])
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *      functions:
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          constructor()
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          componentWillMount()
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          render()
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          tryInstructionsUpload()
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *      bound functions:
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          handleFormChange()
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          handleFormSubmit()
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          handleInstallLinkChange()
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          handleInstallLinkEnter()
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 	var ajax = __webpack_require__(237);
-	var FormData = __webpack_require__(246);
+	var FormData = __webpack_require__(247);
 
 	var ConfigForm = function (_React$Component) {
 	    _inherits(ConfigForm, _React$Component);
@@ -29203,18 +29245,59 @@
 	        _this.state = {
 	            appName: '',
 	            appLogo: null,
-	            appLogoPreview: null,
+	            appLogoFile: null,
 	            briefDescription: '',
 	            description: '',
-	            installInstructions: '',
-	            installLink: '',
-	            demoGuide: '',
+	            packageLinks: null,
+	            demoGuides: null,
+	            setupInstructions: null,
 	            contactEmail: '',
 	            chatterURL: '',
-	            installInstructionsUpload: null
+	            packageLinksAdderFields: [{
+	                label: 'Label for Package',
+	                value: '',
+	                type: 'text',
+	                id: 'packageLabel'
+	            }, {
+	                label: 'URL',
+	                value: '',
+	                type: 'url',
+	                id: 'packageLink'
+	            }],
+	            demoGuidesAdderFields: [{
+	                label: 'Label for Demo Guide',
+	                value: '',
+	                type: 'text',
+	                id: 'demoGuideLabel'
+	            }, {
+	                label: 'URL',
+	                value: '',
+	                type: 'url',
+	                id: 'demoGuideURL'
+	            }],
+	            setupInstructionsAdderFields: [{
+	                label: 'Label for Setup Intstructions',
+	                value: '',
+	                type: 'text',
+	                id: 'setupInstructionsLabel'
+	            }, {
+	                label: 'URL',
+	                value: '',
+	                type: 'url',
+	                id: 'setupInstructionsURL'
+	            }]
 	        };
 	        _this.handleFormChange = _this.handleFormChange.bind(_this);
 	        _this.handleFormSubmit = _this.handleFormSubmit.bind(_this);
+	        _this.handlePackageLinksEnter = _this.handlePackageLinksEnter.bind(_this);
+	        _this.handlePackageLinksChange = _this.handlePackageLinksChange.bind(_this);
+	        _this.handleDemoGuidesEnter = _this.handleDemoGuidesEnter.bind(_this);
+	        _this.handleDemoGuidesChange = _this.handleDemoGuidesChange.bind(_this);
+	        _this.handleSetupInstructionsEnter = _this.handleSetupInstructionsEnter.bind(_this);
+	        _this.handleSetupInstructionsChange = _this.handleSetupInstructionsChange.bind(_this);
+	        _this.handlePackageLinkRemove = _this.handlePackageLinkRemove.bind(_this);
+	        _this.handleDemoGuideRemove = _this.handleDemoGuideRemove.bind(_this);
+	        _this.handleSetupInstructionRemove = _this.handleSetupInstructionRemove.bind(_this);
 	        return _this;
 	    }
 
@@ -29233,37 +29316,14 @@
 	                    _this2.setState({
 	                        appName: parsedResp['appName'],
 	                        briefDescription: parsedResp['briefDescription'],
-	                        appLogoPreview: parsedResp['appLogoPreview'],
+	                        appLogo: parsedResp['appLogo'],
 	                        description: parsedResp['description'],
-	                        installLink: parsedResp['installationLink'],
-	                        installInstructions: parsedResp['installInstructions'],
-	                        demoGuide: parsedResp['demoGuide'],
+	                        packageLinks: parsedResp['packageLinks'],
+	                        demoGuides: parsedResp['demoGuides'],
+	                        setupInstructions: parsedResp['setupInstructions'],
 	                        contactEmail: parsedResp['contactEmail'],
 	                        chatterURL: parsedResp['chatterURL']
 	                    });
-	                } else {
-	                    console.log('fail');
-	                    console.log(error);
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'tryInstructionsUpload',
-	        value: function tryInstructionsUpload() {
-
-	            console.log(this.state.installInstructionsUpload);
-	            var uploadURL = '/api/upload-instructions/';
-	            var aForm = new FormData();
-	            var filUpped = document.getElementById('installInstructionsUpload').files;
-	            for (var key in filUpped) {
-	                if (filUpped.hasOwnProperty(key) && filUpped[key] instanceof File) {
-	                    aForm.append(key, filUpped[key]);
-	                }
-	            }
-	            ajax.post(uploadURL).send(aForm).end(function (error, response) {
-	                if (!error && response) {
-	                    console.log('success');
-	                    console.log(response);
 	                } else {
 	                    console.log('fail');
 	                    console.log(error);
@@ -29286,8 +29346,8 @@
 
 	                    reader.onloadend = function () {
 	                        _this3.setState({
-	                            appLogo: file,
-	                            appLogoPreview: reader.result
+	                            appLogoFile: file,
+	                            appLogo: reader.result
 	                        });
 	                    };
 	                    reader.readAsDataURL(file);
@@ -29297,19 +29357,6 @@
 	                    break;
 	                case 'description':
 	                    this.setState({ description: event.target.value });
-	                    break;
-	                case 'installInstructions':
-	                    this.setState({ installInstructions: event.target.value });
-	                    break;
-	                case 'installInstructionsUpload':
-	                    this.setState({ installInstructionsUpload: event.target.value });
-	                    this.tryInstructionsUpload();
-	                    break;
-	                case 'installLink':
-	                    this.setState({ installLink: event.target.value });
-	                    break;
-	                case 'demoGuide':
-	                    this.setState({ demoGuide: event.target.value });
 	                    break;
 	                case 'contactEmail':
 	                    this.setState({ contactEmail: event.target.value });
@@ -29328,25 +29375,301 @@
 	                updateUrl = '/api/config-app';
 
 	            if (typeof pword != 'undefined' && pword != '') {
-	                console.log('!!!!!!! : ');
 	                ajax.post(updateUrl).set({
 	                    'Content-Type': 'application/json',
 	                    'sfdc_pwd': pword
 	                }).send(this.state).end(function (error, response) {
 	                    if (!error && response.status == 200) {
-
-	                        console.log('success call fr mee');
-	                        console.log(response);
+	                        console.log('success : confirg form submited');
 	                        _reactRouter.browserHistory.push('/');
 	                    } else {
+	                        // !TODO!, add errors if form fails
 	                        console.log('error');
 	                    }
 	                    _reactRouter.browserHistory.push('/');
 	                });
 	            } else {
-	                console.log('%%%^%^^^^^^^^^ : ');
+	                console.log('no password in state');
 	                _reactRouter.browserHistory.push('/');
 	            }
+	        }
+	    }, {
+	        key: 'handlePackageLinksChange',
+	        value: function handlePackageLinksChange(event) {
+	            var fields = this.state.packageLinksAdderFields,
+	                fieldIndex = null,
+	                field = null;
+	            for (var i = 0; i < fields.length; ++i) {
+	                if (fields[i].id == event.target.id) {
+	                    fieldIndex = i;
+	                    field = fields[i];
+	                    field.value = event.target.value;
+	                }
+	            }
+	            fields[fieldIndex] = field;
+	            this.setState({ packageLinksAdderFields: fields });
+	        }
+	    }, {
+	        key: 'handlePackageLinksEnter',
+	        value: function handlePackageLinksEnter(event) {
+
+	            var fields = this.state.packageLinksAdderFields,
+	                objToAdd = {};
+	            for (var i = 0; i < fields.length; ++i) {
+	                if (fields[i].id == 'packageLabel') {
+	                    objToAdd.label = fields[i].value;
+	                }
+	                if (fields[i].id == 'packageLink') {
+	                    if (!fields[i].value.startsWith('http')) {
+	                        objToAdd.url = 'http://' + fields[i].value;
+	                    } else {
+	                        objToAdd.url = fields[i].value;
+	                    }
+	                }
+	                fields[i].value = '';
+	            }
+	            if (this.state.packageLinks == null) {
+	                var arrToAdd = [objToAdd];
+	                this.setState({ packageLinksAdderFields: fields, packageLinks: arrToAdd });
+	            } else {
+	                var currPackageLinks = this.state.packageLinks;
+	                currPackageLinks.push(objToAdd);
+	                this.setState({ packageLinksAdderFields: fields, packageLinks: currPackageLinks });
+	            }
+	        }
+	    }, {
+	        key: 'handleDemoGuidesChange',
+	        value: function handleDemoGuidesChange(event) {
+	            var fields = this.state.demoGuidesAdderFields,
+	                fieldIndex = null,
+	                field = null;
+	            for (var i = 0; i < fields.length; ++i) {
+	                if (fields[i].id == event.target.id) {
+	                    fieldIndex = i;
+	                    field = fields[i];
+	                    field.value = event.target.value;
+	                }
+	            }
+	            fields[fieldIndex] = field;
+	            this.setState({ demoGuidesAdderFields: fields });
+	        }
+	    }, {
+	        key: 'handleDemoGuidesEnter',
+	        value: function handleDemoGuidesEnter(event) {
+	            var fields = this.state.demoGuidesAdderFields,
+	                objToAdd = {};
+	            for (var i = 0; i < fields.length; ++i) {
+	                if (fields[i].id == 'demoGuideLabel') {
+	                    objToAdd.label = fields[i].value;
+	                }
+	                if (fields[i].id == 'demoGuideURL') {
+	                    if (!fields[i].value.startsWith('http')) {
+	                        objToAdd.url = 'http://' + fields[i].value;
+	                    } else {
+	                        objToAdd.url = fields[i].value;
+	                    }
+	                }
+	                fields[i].value = '';
+	            }
+
+	            if (this.state.demoGuides == null) {
+	                var arrToAdd = [objToAdd];
+	                this.setState({ demoGuidesAdderFields: fields, demoGuides: arrToAdd });
+	            } else {
+	                var currDemoGuides = this.state.demoGuides;
+	                currDemoGuides.push(objToAdd);
+	                this.setState({ demoGuidesAdderFields: fields, demoGuides: currDemoGuides });
+	            }
+	        }
+	    }, {
+	        key: 'handleSetupInstructionsChange',
+	        value: function handleSetupInstructionsChange(event) {
+	            var fields = this.state.setupInstructionsAdderFields,
+	                fieldIndex = null,
+	                field = null;
+	            for (var i = 0; i < fields.length; ++i) {
+	                if (fields[i].id == event.target.id) {
+	                    fieldIndex = i;
+	                    field = fields[i];
+	                    field.value = event.target.value;
+	                }
+	            }
+	            fields[fieldIndex] = field;
+	            this.setState({ setupInstructionsAdderFields: fields });
+	        }
+	    }, {
+	        key: 'handleSetupInstructionsEnter',
+	        value: function handleSetupInstructionsEnter(event) {
+	            var fields = this.state.setupInstructionsAdderFields,
+	                objToAdd = {};
+	            for (var i = 0; i < fields.length; ++i) {
+	                if (fields[i].id == 'setupInstructionsLabel') {
+	                    objToAdd.label = fields[i].value;
+	                }
+	                if (fields[i].id == 'setupInstructionsURL') {
+	                    if (!fields[i].value.startsWith('http')) {
+	                        objToAdd.url = 'http://' + fields[i].value;
+	                    } else {
+	                        objToAdd.url = fields[i].value;
+	                    }
+	                }
+	                fields[i].value = '';
+	            }
+	            if (this.state.setupInstructions == null) {
+	                var arrToAdd = [objToAdd];
+	                this.setState({ setupInstructionsAdderFields: fields, setupInstructions: arrToAdd });
+	            } else {
+	                var currSetupInstructions = this.state.setupInstructions;
+	                currSetupInstructions.push(objToAdd);
+	                this.setState({ setupInstructionsAdderFields: fields, setupInstructions: currSetupInstructions });
+	            }
+	        }
+	    }, {
+	        key: 'packageLinksMarkup',
+	        value: function packageLinksMarkup() {
+	            var _this4 = this;
+
+	            if (Array.isArray(this.state.packageLinks)) {
+	                return this.state.packageLinks.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'badge', onClick: _this4.handlePackageLinkRemove, id: index },
+	                            _react2.default.createElement('i', { className: 'icon-remove' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'label label-default' },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { target: '_blank', href: obj.url },
+	                                    obj.label
+	                                )
+	                            )
+	                        )
+	                    );
+	                });
+	            } else {
+	                return _react2.default.createElement(
+	                    'li',
+	                    { key: '0', className: 'list-group-item' },
+	                    'no packages added'
+	                );
+	            }
+	        }
+	    }, {
+	        key: 'demoGuidesMarkup',
+	        value: function demoGuidesMarkup() {
+	            var _this5 = this;
+
+	            if (Array.isArray(this.state.demoGuides)) {
+	                return this.state.demoGuides.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'badge', onClick: _this5.handleDemoGuideRemove, id: index },
+	                            _react2.default.createElement('i', { className: 'icon-remove' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'label label-default' },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { target: '_blank', href: obj.url },
+	                                    obj.label
+	                                )
+	                            )
+	                        )
+	                    );
+	                });
+	            } else {
+	                return _react2.default.createElement(
+	                    'li',
+	                    { key: '0', className: 'list-group-item' },
+	                    'no demo guides added'
+	                );
+	            }
+	        }
+	    }, {
+	        key: 'setupInstructionsMarkup',
+	        value: function setupInstructionsMarkup() {
+	            var _this6 = this;
+
+	            if (Array.isArray(this.state.setupInstructions)) {
+	                return this.state.setupInstructions.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        'li',
+	                        { key: index, className: 'list-group-item' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'badge', onClick: _this6.handleSetupInstructionRemove, id: index },
+	                            _react2.default.createElement('i', { className: 'icon-remove' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'label label-default' },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { target: '_blank', href: obj.url },
+	                                    obj.label
+	                                )
+	                            )
+	                        )
+	                    );
+	                });
+	            } else {
+	                return _react2.default.createElement(
+	                    'li',
+	                    { key: '0', className: 'list-group-item' },
+	                    'no setup instructions added'
+	                );
+	            }
+	        }
+	    }, {
+	        key: 'handlePackageLinkRemove',
+	        value: function handlePackageLinkRemove(event) {
+	            var packgeLinks = this.state.packageLinks,
+	                indexToRem = parseInt(event.target.id);
+	            packgeLinks.splice(indexToRem, 1);
+	            if (packgeLinks.length == 0) {
+	                packgeLinks = null;
+	            }
+	            this.setState({ packageLinks: packgeLinks });
+	        }
+	    }, {
+	        key: 'handleDemoGuideRemove',
+	        value: function handleDemoGuideRemove(event) {
+	            var demoGuids = this.state.demoGuides,
+	                indexToRem = parseInt(event.target.id);
+	            demoGuids.splice(indexToRem, 1);
+	            if (demoGuids.length == 0) {
+	                demoGuids = null;
+	            }
+	            this.setState({ demoGuides: demoGuids });
+	        }
+	    }, {
+	        key: 'handleSetupInstructionRemove',
+	        value: function handleSetupInstructionRemove(event) {
+	            var setupInstructs = this.state.setupInstructions,
+	                indexToRem = parseInt(event.target.id);
+	            setupInstructs.splice(indexToRem, 1);
+	            if (setupInstructs.length == 0) {
+	                setupInstructs = null;
+	            }
+	            this.setState({ setupInstructions: setupInstructs });
 	        }
 	    }, {
 	        key: 'render',
@@ -29354,8 +29677,8 @@
 
 	            var imgPrevMarkup = null;
 
-	            if (this.state.appLogoPreview != null) {
-	                imgPrevMarkup = _react2.default.createElement('img', { src: this.state.appLogoPreview });
+	            if (this.state.appLogo != null) {
+	                imgPrevMarkup = _react2.default.createElement('img', { src: this.state.appLogo });
 	            }
 
 	            return _react2.default.createElement(
@@ -29366,107 +29689,152 @@
 	                    { className: 'col-xs-12 col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2' },
 	                    _react2.default.createElement(
 	                        'form',
-	                        { onSubmit: this.handleFormSubmit },
+	                        { className: 'form-horizontal', onSubmit: this.handleFormSubmit },
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'appName' },
+	                                { className: 'col-sm-2 control-label', htmlFor: 'appName' },
 	                                'App Name'
 	                            ),
-	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'appName', placeholder: 'App Name', value: this.state.appName, onChange: this.handleFormChange })
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-10' },
+	                                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'appName', placeholder: 'App Name', value: this.state.appName, onChange: this.handleFormChange })
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'appLogo' },
+	                                { className: 'col-sm-2 control-label', htmlFor: 'appLogo' },
 	                                'App Logo'
 	                            ),
-	                            _react2.default.createElement('input', { type: 'file', className: 'form-control', accept: 'image/*', id: 'appLogo', placeholder: 'App Logo', onChange: this.handleFormChange }),
-	                            imgPrevMarkup
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-10' },
+	                                _react2.default.createElement('input', { type: 'file', className: 'form-control', accept: 'image/*', id: 'appLogo', placeholder: 'App Logo', onChange: this.handleFormChange }),
+	                                imgPrevMarkup
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'briefDescription' },
+	                                { className: 'col-sm-2 control-label', htmlFor: 'briefDescription' },
 	                                'Brief Description'
 	                            ),
-	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'briefDescription', placeholder: 'Brief Description', value: this.state.briefDescription, onChange: this.handleFormChange })
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-10' },
+	                                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'briefDescription', placeholder: 'Brief Description', value: this.state.briefDescription, onChange: this.handleFormChange })
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'description' },
+	                                { className: 'col-sm-2 control-label', htmlFor: 'description' },
 	                                'Description'
 	                            ),
-	                            _react2.default.createElement('textarea', { className: 'form-control', rows: '2', id: 'description', value: this.state.description, onChange: this.handleFormChange })
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-10' },
+	                                _react2.default.createElement('textarea', { className: 'form-control', rows: '2', id: 'description', value: this.state.description, onChange: this.handleFormChange })
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'installInstructionsUpload' },
-	                                'Upload Setup/Installation Instructions'
+	                                { className: 'col-sm-2 control-label', htmlFor: 'packageLinks' },
+	                                'Package Links'
 	                            ),
-	                            _react2.default.createElement('input', { type: 'file', accept: 'application/pdf', className: 'form-control', id: 'installInstructionsUpload', placeholder: 'Link to Setup/Installation Instructions', onChange: this.handleFormChange })
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'form-group' },
 	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'installInstructions' },
-	                                'Link to Setup/Installation Instructions'
+	                                'div',
+	                                { className: 'col-sm-5' },
+	                                _react2.default.createElement(_Adder2.default, { buttonLabel: 'add', fields: this.state.packageLinksAdderFields, handleChange: this.handlePackageLinksChange, handleEnter: this.handlePackageLinksEnter })
 	                            ),
-	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'installInstructions', placeholder: 'Link to Setup/Installation Instructions', value: this.state.installInstructions, onChange: this.handleFormChange })
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-5' },
+	                                _react2.default.createElement(
+	                                    'ul',
+	                                    { className: 'list-group' },
+	                                    this.packageLinksMarkup()
+	                                )
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'installLink' },
-	                                'Link to Package/ Install Link'
+	                                { className: 'col-sm-2 control-label', htmlFor: 'demoGuides' },
+	                                'Demo Guides'
 	                            ),
-	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'installLink', placeholder: 'Link to Package/ Install Link', value: this.state.installLink, onChange: this.handleFormChange })
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'form-group' },
 	                            _react2.default.createElement(
-	                                'label',
-	                                { htmlFor: 'demoGuide' },
-	                                'Link to Demo Guide'
+	                                'div',
+	                                { className: 'col-sm-5' },
+	                                _react2.default.createElement(_Adder2.default, { buttonLabel: 'add', fields: this.state.demoGuidesAdderFields, handleChange: this.handleDemoGuidesChange, handleEnter: this.handleDemoGuidesEnter })
 	                            ),
-	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'demoGuide', placeholder: 'Link to Demo Guide', value: this.state.demoGuide, onChange: this.handleFormChange })
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-5' },
+	                                this.demoGuidesMarkup()
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'contactEmail' },
+	                                { className: 'col-sm-2 control-label', htmlFor: 'demoGuides' },
+	                                'Setup Instructions'
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-5' },
+	                                _react2.default.createElement(_Adder2.default, { buttonLabel: 'add', fields: this.state.setupInstructionsAdderFields, handleChange: this.handleSetupInstructionsChange, handleEnter: this.handleSetupInstructionsEnter })
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-5' },
+	                                this.setupInstructionsMarkup()
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-group' },
+	                            _react2.default.createElement(
+	                                'label',
+	                                { className: 'col-sm-2 control-label', htmlFor: 'contactEmail' },
 	                                'Contact Email'
 	                            ),
-	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'contactEmail', placeholder: 'Contact Email', value: this.state.contactEmail, onChange: this.handleFormChange })
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-10' },
+	                                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'contactEmail', placeholder: 'Contact Email', value: this.state.contactEmail, onChange: this.handleFormChange })
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'form-group' },
 	                            _react2.default.createElement(
 	                                'label',
-	                                { htmlFor: 'chatterURL' },
+	                                { className: 'col-sm-2 control-label', htmlFor: 'chatterURL' },
 	                                'Chatter Group URL'
 	                            ),
-	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'chatterURL', placeholder: 'Chatter Group URL', value: this.state.chatterURL, onChange: this.handleFormChange })
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-10' },
+	                                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'chatterURL', placeholder: 'Chatter Group URL', value: this.state.chatterURL, onChange: this.handleFormChange })
+	                            )
 	                        ),
 	                        _react2.default.createElement(
 	                            'button',
@@ -29487,6 +29855,98 @@
 
 /***/ },
 /* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(178);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  @Adder.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *      props:
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *          obj_params {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *              fields: [{label, type, id, value}...]
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *              handleChange: function
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *              handleEnter: function
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	var Adder = function (_React$Component) {
+	    _inherits(Adder, _React$Component);
+
+	    function Adder(props) {
+	        _classCallCheck(this, Adder);
+
+	        var _this = _possibleConstructorReturn(this, (Adder.__proto__ || Object.getPrototypeOf(Adder)).call(this, props));
+
+	        _this.state = {
+	            isLoading: false
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Adder, [{
+	        key: "formElems",
+	        value: function formElems() {
+	            var _this2 = this;
+
+	            if (this.props.fields.length > 0) {
+	                return this.props.fields.map(function (obj, index) {
+	                    return _react2.default.createElement(
+	                        "div",
+	                        { key: index, className: "form-group" },
+	                        _react2.default.createElement(
+	                            "label",
+	                            { htmlFor: obj.id },
+	                            obj.label
+	                        ),
+	                        _react2.default.createElement("input", { type: obj.type, className: "form-control", id: obj.id, placeholder: obj.label, value: obj.value, onChange: _this2.props.handleChange })
+	                    );
+	                });
+	            } else {
+	                return null;
+	            }
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                "div",
+	                null,
+	                this.formElems(),
+	                _react2.default.createElement(
+	                    "button",
+	                    { type: "button", className: "btn btn-sm btn-default", onClick: this.props.handleEnter },
+	                    this.props.buttonLabel
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Adder;
+	}(_react2.default.Component);
+
+	exports.default = Adder;
+	module.exports = exports["default"];
+
+/***/ },
+/* 247 */
 /***/ function(module, exports) {
 
 	/* eslint-env browser */
