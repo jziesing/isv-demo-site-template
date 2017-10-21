@@ -59,7 +59,7 @@ class ConfigPage extends React.Component {
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-md-4"></div>
-                        <div class="col-xs-12 col-sm-6 col-md-8">
+                        <div class="col-xs-12 col-sm-8 col-md-6">
                             <h5>ISV App Demo Kit Best Practices:</h5>
                             <ul class="list-group">
                                 <li class="list-group-item">Partner hosted landing page</li>

@@ -29090,7 +29090,7 @@
 	                        _react2.default.createElement('div', { className: 'col-xs-6 col-md-4' }),
 	                        _react2.default.createElement(
 	                            'div',
-	                            { className: 'col-xs-12 col-sm-6 col-md-8' },
+	                            { className: 'col-xs-12 col-sm-8 col-md-6' },
 	                            _react2.default.createElement(
 	                                'h5',
 	                                null,
