@@ -5,6 +5,13 @@
   "logo": "https://cdn-images-1.medium.com/fit/c/120/120/1*mu-Y8JRkK9YrllPE9wc4Eg.jpeg",
   "keywords": ["salesforce", "partners", "appexchange"],
   "env": {
-      "config_password": ""
+      "config_password": "",
+      "appURL": "",
+      "appName": "",
+      "companyId": "",
+      "contactEmail": "",
   }
 }
+
+
+appURL, contactEmail, companyName, appName, companyId
