@@ -13,7 +13,7 @@ let express = require('express'),
 	bodyParser = require('body-parser'),
 	apiRouter = require('./ApiRouter.js'),
 	clientRouter = require('./ClientRouter.js'),
-    ajax = require('superagent');
+    request = require('request');
 
 
 //  create server app
@@ -39,20 +39,33 @@ function RegisterApp() {
         "appURL": process.env.appURL,
         "appName": process.env.appName,
         "companyId": process.env.companyId,
+        "companyName": process.env.companyName,
         "contactEmail": process.env.contactEmail
     };
+    // Set the headers
+    var headers = {
+        'jzapi-token': 'change_this_later'
+    }
 
-    ajax.post('http://partner-site-template-reporter.herokuapp.com/jzapi/register-app')
-        .set({ 'jzapi-token': 'change_this_later' })
-        .send(dataToSend)
-        .end((error, resp) => {
-            console.log(resp);
-            if(!error && resp.status == 200) {
-                console.log('success register call : ' + resp);
-            } else {
-                console.log('error register call : ' + resp);
-            }
-        });
+    // Configure the request
+    var options = {
+        url: 'http://partner-site-template-reporter.herokuapp.com/jzapi/register-partner',
+        method: 'POST',
+        headers: headers,
+        form: dataToSend
+    }
+
+    // Start the request
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            // Print out the response body
+
+            console.log(body);
+        } else {
+            console.log(error);
+            console.log(response);
+        }
+    });
 }
 
 
