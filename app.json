@@ -9,9 +9,6 @@
       "appURL": "",
       "appName": "",
       "companyId": "",
-      "contactEmail": "",
+      "contactEmail": ""
   }
 }
-
-
-appURL, contactEmail, companyName, appName, companyId
