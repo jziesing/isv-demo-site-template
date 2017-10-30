@@ -35,41 +35,6 @@ app.use(clientRouter);
 
 // register app function
 function RegisterApp() {
-
-    // let dataToSend = {
-    //     "appURL": process.env.appURL,
-    //     "appName": process.env.appName,
-    //     "companyId": process.env.companyId,
-    //     "companyName": process.env.companyName,
-    //     "contactEmail": process.env.contactEmail
-    // };
-    // // Set the headers
-    // var headers = {
-    //     'jzapi-token': 'change_this_later'
-    // }
-    //
-    // console.log('dataToSend');
-    // console.log(dataToSend);
-
-    // Configure the request
-    // var options = {
-    //     url: 'http://partner-site-template-reporter.herokuapp.com/jzapi/register-partner',
-    //     method: 'POST',
-    //     headers: headers,
-    //     form: dataToSend
-    // }
-
-    // Start the request
-    // request(options, function (error, response, body) {
-    //     if (!error && response.statusCode == 200) {
-    //         // Print out the response body
-    //
-    //         console.log(body);
-    //     } else {
-    //         console.log(error);
-    //         console.log(response);
-    //     }
-    // });
     let urlss = 'http://partner-site-template-reporter.herokuapp.com/jzapi/register-partner';
     ajax.post(urlss)
         .set({'jzapi-token': 'change_this_later'})

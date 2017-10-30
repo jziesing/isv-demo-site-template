@@ -135,11 +135,16 @@ class Home extends React.Component {
                         <hr class="featurette-divider" />
                     </div>
                     <div class="row contactArr">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="pull-left">
+                                <h4>Contact Info</h4>
+                            </div>
+                        </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <a href={contactEmailHref} >{this.state.contactEmail}</a>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
-                            {this.state.chatterURL}
+                            <a href={this.state.chatterURL} target="_blank">{this.state.chatterURL}</a>
                         </div>
                     </div>
                     <div class="row">

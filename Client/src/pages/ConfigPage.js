@@ -21,7 +21,6 @@ class ConfigPage extends React.Component {
     }
 
     handlePasswordSubmit(event) {
-        console.log('testsss');
         if(this.state.inputPword.length > 0) {
             let loginUrl = '/api/login';
             ajax.post(loginUrl)
@@ -36,6 +35,7 @@ class ConfigPage extends React.Component {
                     } else {
                         console.log('fail');
                         console.log(error);
+                        browserHistory.push('/');
                     }
                 }
             );
@@ -43,7 +43,6 @@ class ConfigPage extends React.Component {
     }
 
     handleCancel() {
-        console.log('caaa');
         browserHistory.push('/');
     }
 

@@ -64,6 +64,51 @@ class ConfigForm extends React.Component {
                 },{
                     label:"Slate",
                     url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css"
+                },{
+                    label:"Cerulean",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css"
+                },{
+                    label:"Cosmo",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css"
+                },{
+                    label:"Cyborg",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css"
+                },{
+                    label:"Darkly",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css"
+                },{
+                    label:"Flatly",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css"
+                },{
+                    label:"Journal",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css"
+                },{
+                    label:"Lumen",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css"
+                },{
+                    label:"Paper",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css"
+                },{
+                    label:"Readable",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css"
+                },{
+                    label:"Sandstone",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css"
+                },{
+                    label:"Solar",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/solar/bootstrap.min.css"
+                },{
+                    label:"Spacelab",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css"
+                },{
+                    label:"Superhero",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css"
+                },{
+                    label:"United",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css"
+                },{
+                    label:"Yeti",
+                    url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css"
                 }
             ],
             packageLinksAdderFields: [
@@ -353,7 +398,7 @@ class ConfigForm extends React.Component {
             return this.state.packageLinks.map((obj, index) => {
                 return (
                     <li key={index} class="list-group-item">
-                        <span class="badge" onClick={this.handlePackageLinkRemove} id={index}><i class="icon-remove"></i></span>
+                        <span class="badge removIc" onClick={this.handlePackageLinkRemove} id={index}><i class="icon-remove"></i></span>
                         <h3><span class="label label-default"><a target="_blank" href={obj.url}>{obj.label}</a></span></h3>
                     </li>
                 );
@@ -372,7 +417,7 @@ class ConfigForm extends React.Component {
             return this.state.demoGuides.map((obj, index) => {
                 return (
                     <li key={index} class="list-group-item">
-                        <span class="badge" onClick={this.handleDemoGuideRemove} id={index}><i class="icon-remove"></i></span>
+                        <span class="badge removIc" onClick={this.handleDemoGuideRemove} id={index}><i class="icon-remove"></i></span>
                         <h3><span class="label label-default"><a target="_blank" href={obj.url}>{obj.label}</a></span></h3>
                     </li>
                 );
@@ -391,7 +436,7 @@ class ConfigForm extends React.Component {
             return this.state.setupInstructions.map((obj, index) => {
                 return (
                     <li key={index} class="list-group-item">
-                        <span class="badge" onClick={this.handleSetupInstructionRemove} id={index}><i class="icon-remove"></i></span>
+                        <span class="badge removIc" onClick={this.handleSetupInstructionRemove} id={index}><i class="icon-remove"></i></span>
                         <h3><span class="label label-default"><a target="_blank" href={obj.url}>{obj.label}</a></span></h3>
                     </li>
                 );
@@ -455,7 +500,7 @@ class ConfigForm extends React.Component {
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2">
                     <form class="form-horizontal" onSubmit={this.handleFormSubmit}>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="appName">Style Theme</label>
+                            <label class="col-sm-2 control-label" for="appName">Style Theme (<a href="https://www.bootstrapcdn.com/bootswatch/" target="_blank">see reference</a>)</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="sel1" value={this.state.styleURL} onChange={this.handleStyleChange}>
                                     {this.styleOptionsMarkup()}

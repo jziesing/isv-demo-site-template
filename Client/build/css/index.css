@@ -45,6 +45,9 @@
 .headingContainer {
     vertical-align: middle;
 }
+.removIc {
+    cursor: pointer;
+}
 @media (max-width: 767px) {
     .footer {
       margin-left: -20px;

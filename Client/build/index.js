@@ -28950,6 +28950,19 @@
 	                        { className: 'row contactArr' },
 	                        _react2.default.createElement(
 	                            'div',
+	                            { className: 'col-xs-12 col-sm-12 col-md-12' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'pull-left' },
+	                                _react2.default.createElement(
+	                                    'h4',
+	                                    null,
+	                                    'Contact Info'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
 	                            { className: 'col-xs-12 col-sm-6 col-md-6' },
 	                            _react2.default.createElement(
 	                                'a',
@@ -28960,7 +28973,11 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'col-xs-12 col-sm-6 col-md-6' },
-	                            this.state.chatterURL
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: this.state.chatterURL, target: '_blank' },
+	                                this.state.chatterURL
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -29040,7 +29057,6 @@
 	        value: function handlePasswordSubmit(event) {
 	            var _this2 = this;
 
-	            console.log('testsss');
 	            if (this.state.inputPword.length > 0) {
 	                var loginUrl = '/api/login';
 	                ajax.post(loginUrl).send(this.state).end(function (error, response) {
@@ -29053,6 +29069,7 @@
 	                    } else {
 	                        console.log('fail');
 	                        console.log(error);
+	                        _reactRouter.browserHistory.push('/');
 	                    }
 	                });
 	            }
@@ -29060,7 +29077,6 @@
 	    }, {
 	        key: 'handleCancel',
 	        value: function handleCancel() {
-	            console.log('caaa');
 	            _reactRouter.browserHistory.push('/');
 	        }
 	    }, {
@@ -29304,6 +29320,51 @@
 	            }, {
 	                label: "Slate",
 	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css"
+	            }, {
+	                label: "Cerulean",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css"
+	            }, {
+	                label: "Cosmo",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css"
+	            }, {
+	                label: "Cyborg",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css"
+	            }, {
+	                label: "Darkly",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css"
+	            }, {
+	                label: "Flatly",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css"
+	            }, {
+	                label: "Journal",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css"
+	            }, {
+	                label: "Lumen",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css"
+	            }, {
+	                label: "Paper",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css"
+	            }, {
+	                label: "Readable",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/readable/bootstrap.min.css"
+	            }, {
+	                label: "Sandstone",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/sandstone/bootstrap.min.css"
+	            }, {
+	                label: "Solar",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/solar/bootstrap.min.css"
+	            }, {
+	                label: "Spacelab",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css"
+	            }, {
+	                label: "Superhero",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css"
+	            }, {
+	                label: "United",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css"
+	            }, {
+	                label: "Yeti",
+	                url: "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css"
 	            }],
 	            packageLinksAdderFields: [{
 	                label: 'Label for Package',
@@ -29603,7 +29664,7 @@
 	                        { key: index, className: 'list-group-item' },
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: 'badge', onClick: _this4.handlePackageLinkRemove, id: index },
+	                            { className: 'badge removIc', onClick: _this4.handlePackageLinkRemove, id: index },
 	                            _react2.default.createElement('i', { className: 'icon-remove' })
 	                        ),
 	                        _react2.default.createElement(
@@ -29641,7 +29702,7 @@
 	                        { key: index, className: 'list-group-item' },
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: 'badge', onClick: _this5.handleDemoGuideRemove, id: index },
+	                            { className: 'badge removIc', onClick: _this5.handleDemoGuideRemove, id: index },
 	                            _react2.default.createElement('i', { className: 'icon-remove' })
 	                        ),
 	                        _react2.default.createElement(
@@ -29679,7 +29740,7 @@
 	                        { key: index, className: 'list-group-item' },
 	                        _react2.default.createElement(
 	                            'span',
-	                            { className: 'badge', onClick: _this6.handleSetupInstructionRemove, id: index },
+	                            { className: 'badge removIc', onClick: _this6.handleSetupInstructionRemove, id: index },
 	                            _react2.default.createElement('i', { className: 'icon-remove' })
 	                        ),
 	                        _react2.default.createElement(
@@ -29780,7 +29841,13 @@
 	                            _react2.default.createElement(
 	                                'label',
 	                                { className: 'col-sm-2 control-label', htmlFor: 'appName' },
-	                                'Style Theme'
+	                                'Style Theme (',
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: 'https://www.bootstrapcdn.com/bootswatch/', target: '_blank' },
+	                                    'see reference'
+	                                ),
+	                                ')'
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
