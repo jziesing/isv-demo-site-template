@@ -399,7 +399,7 @@ class ConfigForm extends React.Component {
                 return (
                     <li key={index} class="list-group-item">
                         <span class="badge removIc" onClick={this.handlePackageLinkRemove} id={index}><i class="icon-remove"></i></span>
-                        <h3><span class="label label-default"><a target="_blank" href={obj.url}>{obj.label}</a></span></h3>
+                        <h4><span class="label label-default itemLabb"><a target="_blank" href={obj.url}>{obj.label}</a></span></h4>
                     </li>
                 );
             });
@@ -418,7 +418,7 @@ class ConfigForm extends React.Component {
                 return (
                     <li key={index} class="list-group-item">
                         <span class="badge removIc" onClick={this.handleDemoGuideRemove} id={index}><i class="icon-remove"></i></span>
-                        <h3><span class="label label-default"><a target="_blank" href={obj.url}>{obj.label}</a></span></h3>
+                        <h4><span class="label label-default itemLabb"><a target="_blank" href={obj.url}>{obj.label}</a></span></h4>
                     </li>
                 );
             });
@@ -437,7 +437,7 @@ class ConfigForm extends React.Component {
                 return (
                     <li key={index} class="list-group-item">
                         <span class="badge removIc" onClick={this.handleSetupInstructionRemove} id={index}><i class="icon-remove"></i></span>
-                        <h3><span class="label label-default"><a target="_blank" href={obj.url}>{obj.label}</a></span></h3>
+                        <h4><span class="label label-default itemLabb"><a target="_blank" href={obj.url}>{obj.label}</a></span></h4>
                     </li>
                 );
             });

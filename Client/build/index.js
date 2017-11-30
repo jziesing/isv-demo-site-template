@@ -29668,11 +29668,11 @@
 	                            _react2.default.createElement('i', { className: 'icon-remove' })
 	                        ),
 	                        _react2.default.createElement(
-	                            'h3',
+	                            'h4',
 	                            null,
 	                            _react2.default.createElement(
 	                                'span',
-	                                { className: 'label label-default' },
+	                                { className: 'label label-default itemLabb' },
 	                                _react2.default.createElement(
 	                                    'a',
 	                                    { target: '_blank', href: obj.url },
@@ -29706,11 +29706,11 @@
 	                            _react2.default.createElement('i', { className: 'icon-remove' })
 	                        ),
 	                        _react2.default.createElement(
-	                            'h3',
+	                            'h4',
 	                            null,
 	                            _react2.default.createElement(
 	                                'span',
-	                                { className: 'label label-default' },
+	                                { className: 'label label-default itemLabb' },
 	                                _react2.default.createElement(
 	                                    'a',
 	                                    { target: '_blank', href: obj.url },
@@ -29744,11 +29744,11 @@
 	                            _react2.default.createElement('i', { className: 'icon-remove' })
 	                        ),
 	                        _react2.default.createElement(
-	                            'h3',
+	                            'h4',
 	                            null,
 	                            _react2.default.createElement(
 	                                'span',
-	                                { className: 'label label-default' },
+	                                { className: 'label label-default itemLabb' },
 	                                _react2.default.createElement(
 	                                    'a',
 	                                    { target: '_blank', href: obj.url },

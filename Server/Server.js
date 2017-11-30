@@ -39,10 +39,10 @@ function RegisterApp() {
     ajax.post(urlss)
         .set({'jzapi-token': 'change_this_later'})
         .send({
-            "appURL": process.env.appURL,
-            "appName": process.env.appName,
-            "companyId": process.env.companyId,
+            "appName": process.env.HEROKU_APP_NAME,
+            "appURL": 'http://' + process.env.HEROKU_APP_NAME + '.herokuapp.com',
             "companyName": process.env.companyName,
+            "contactName": process.env.contactName,
             "contactEmail": process.env.contactEmail
         }).end((error, response) => {
             console.log(response);

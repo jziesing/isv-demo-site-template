@@ -48,6 +48,9 @@
 .removIc {
     cursor: pointer;
 }
+.itemLabb {
+    display: inherit;
+}
 @media (max-width: 767px) {
     .footer {
       margin-left: -20px;
@@ -56,6 +59,8 @@
       padding-right: 20px;
     }
 }
+
+
 
 
 /*
