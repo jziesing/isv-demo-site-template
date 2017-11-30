@@ -35,6 +35,8 @@ app.use(clientRouter);
 
 // register app function
 function RegisterApp() {
+    console.log('::registering app::');
+    console.log('app name - ' + process.env.HEROKU_APP_NAME + ' : parent app name - ' + process.env.HEROKU_PARENT_APP_NAME);
     let urlss = 'http://partner-site-template-reporter.herokuapp.com/jzapi/register-partner';
     ajax.post(urlss)
         .set({'jzapi-token': 'change_this_later'})

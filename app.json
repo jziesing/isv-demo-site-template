@@ -6,10 +6,10 @@
     "keywords": ["salesforce", "partners", "appexchange"],
     "env": {
         "HEROKU_APP_NAME": {
-            "required": true
+            "required": false
         },
         "HEROKU_PARENT_APP_NAME": {
-            "required": true
+            "required": false
         },
         "config_password": "",
         "companyName": "",
