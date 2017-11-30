@@ -11,7 +11,6 @@ require('babel-register')({
 
 let express = require('express'),
 	bodyParser = require('body-parser'),
-    http = require('http'),
 	apiRouter = require('./ApiRouter.js'),
 	clientRouter = require('./ClientRouter.js'),
     request = require('request');
@@ -39,38 +38,22 @@ function RegisterApp() {
     console.log('::registering app::');
     console.log('app name - ' + process.env.HEROKU_APP_NAME + ' : parent app name - ' + process.env.HEROKU_PARENT_APP_NAME);
     let urlss = 'http://partner-site-template-reporter.herokuapp.com/jzapi/register-partner';
-    var options = {
-      host: 'http://partner-site-template-reporter.herokuapp.com',
-      port: 80,
-      path: '/jzapi/register-partner',
-      headers:{'jzapi-token': 'change_this_later'},
-      method: 'POST'
-    };
-
-    http.request(options, function(res) {
-      console.log('STATUS: ' + res.statusCode);
-      console.log('HEADERS: ' + JSON.stringify(res.headers));
-      res.setEncoding('utf8');
-      res.on('data', function (chunk) {
-        console.log('BODY: ' + chunk);
-      });
-    }).end();
-    // ajax.post(urlss)
-    //     .set({'jzapi-token': 'change_this_later'})
-    //     .send({
-    //         "appName": process.env.HEROKU_APP_NAME,
-    //         "appURL": 'http://' + process.env.HEROKU_APP_NAME + '.herokuapp.com',
-    //         "companyName": process.env.companyName,
-    //         "contactName": process.env.contactName,
-    //         "contactEmail": process.env.contactEmail
-    //     }).end((error, response) => {
-    //         console.log(response);
-    //         if(!error && response.status == 200) {
-    //             console.log('success : app registered');
-    //         } else {
-    //             console.log('error');
-    //         }
-    //     });
+    ajax.post(urlss)
+        .set({'jzapi-token': 'change_this_later'})
+        .send({
+            "appName": process.env.HEROKU_APP_NAME,
+            "appURL": 'http://' + process.env.HEROKU_APP_NAME + '.herokuapp.com',
+            "companyName": process.env.companyName,
+            "contactName": process.env.contactName,
+            "contactEmail": process.env.contactEmail
+        }).end((error, response) => {
+            console.log(response);
+            if(!error && response.status == 200) {
+                console.log('success : app registered');
+            } else {
+                console.log('error');
+            }
+        });
 }
 
 
