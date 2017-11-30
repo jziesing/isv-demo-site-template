@@ -11,6 +11,7 @@ require('babel-register')({
 
 let express = require('express'),
 	bodyParser = require('body-parser'),
+    http = require('http'),
 	apiRouter = require('./ApiRouter.js'),
 	clientRouter = require('./ClientRouter.js'),
     request = require('request');
