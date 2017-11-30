@@ -3,6 +3,9 @@
     "description": "A template react app for partners to use to market their app to salesforce SE's. Hosted on Heroku.",
     "repository": "https://github.com/jziesing/isv-demo-site-template.git",
     "logo": "https://cdn-images-1.medium.com/fit/c/120/120/1*mu-Y8JRkK9YrllPE9wc4Eg.jpeg",
+    "scripts":{
+        "postdeploy":"node RegisterAfterDeploy.js"
+    },
     "keywords": ["salesforce", "partners", "appexchange"],
     "env": {
         "HEROKU_APP_NAME": {
